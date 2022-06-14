@@ -1,0 +1,61 @@
+﻿
+@model PagedList.IPagedList<InterselMCVProject.Models.PhoneLine>
+@using PagedList.Mvc;
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Intesel</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css%22%3E" />
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js%22%3E"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dtPrincipal').DataTable();
+        });
+    </script>
+</head>
+<body>
+    <header style="border">
+        <div>
+            <h4>Listado de celulares</h4>
+        </div>
+    </header>
+    @using (Html.BeginForm())
+    {
+        <p>
+            Filtrar por numero: @Html.TextBox("SearchString")
+            <input type="submit" value="Search" />
+        </p>
+    }
+    <table id="dtPrincipal" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th scope="col">Celular</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Administrar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.MobileLine)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Description) </td>
+                    <td>@Html.ActionLink("Detalles de llamada", "Details", new { line = item.MobileLine })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</body>
+</html>
+
+

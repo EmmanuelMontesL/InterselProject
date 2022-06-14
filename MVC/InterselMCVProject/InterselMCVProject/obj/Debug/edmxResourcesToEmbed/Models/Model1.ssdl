@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InterselDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="PhoneDetail">
+    <Key>
+      <PropertyRef Name="CallDetailId" />
+    </Key>
+    <Property Name="CallDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MobileLine" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="CalledPartyNumber" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="CalledPartyDescription" Type="varchar(max)" />
+    <Property Name="DateTime" Type="datetime" Nullable="false" />
+    <Property Name="Duration" Type="int" Nullable="false" />
+    <Property Name="TotalCost" Type="decimal" Precision="10" Scale="4" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhoneLine">
+    <Key>
+      <PropertyRef Name="MobileLineId" />
+    </Key>
+    <Property Name="MobileLineId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MobileLine" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Description" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="idUsuario" />
+    </Key>
+    <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreUsuario" Type="varchar" MaxLength="200" />
+    <Property Name="TagUsuario" Type="varchar" MaxLength="10" />
+    <Property Name="Clave" Type="varchar" MaxLength="10" />
+    <Property Name="TipoUsuario" Type="int" />
+    <Property Name="Rol" Type="int" />
+    <Property Name="MobileLine" Type="varchar" MaxLength="15" />
+    <Property Name="Activo" Type="bit" />
+  </EntityType>
+  <Function Name="LOGINSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TagUsuario" Type="varchar" Mode="In" />
+    <Parameter Name="Clave" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="InterselDBModelStoreContainer">
+    <EntitySet Name="PhoneDetail" EntityType="Self.PhoneDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhoneLine" EntityType="Self.PhoneLine" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

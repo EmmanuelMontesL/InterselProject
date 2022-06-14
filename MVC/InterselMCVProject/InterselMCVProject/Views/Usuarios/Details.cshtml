@@ -1,0 +1,56 @@
+﻿@model IEnumerable<InterselMCVProject.Models.Usuarios>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Intesel</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dtUsers').DataTable();
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+</head>
+<body >
+    <header style="border">
+        <div>
+            <h4>Catalogo Usuarios</h4>
+        </div>
+        <div class="d-flex justify-content-center form_container">
+            <form method="post">
+                <div class="input-group col-md-3 panel-heading">
+                    
+                </div>
+            </form>
+        </div>
+    </header>
+    <div class="panel-primary">
+        <table id="dtUsers" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+            <tr>
+                <th> Nombre </th>
+                <th>Usuario</th>
+                <th>Clave</th>
+                <th>Tipo de Usuario </th>
+                <th>Rol</th>
+                <th>Telefono </th>
+                <th>Modificar</th>
+                <th>Eliminar</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.NombreUsuario)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TagUsuario) </td>
+                    <td>@Html.DisplayFor(modelItem => item.Clave) </td>
+                    <td>@Html.DisplayFor(modelItem => item.TipoUsuario)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Rol) </td>
+                    <td>@Html.DisplayFor(modelItem => item.MobileLine) </td>
+                    <td>@Html.ActionLink("Modificar", "Edit", new { id = item.idUsuario }) </td>
+                    <td>@Html.ActionLink("Eliminar", "Delete", new { id = item.idUsuario }) </td>
+                </tr>
+             }
+        </table>
+     </div>
+</body>

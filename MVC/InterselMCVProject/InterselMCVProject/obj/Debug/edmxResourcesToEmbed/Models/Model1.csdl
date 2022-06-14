@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InterselDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="PhoneDetail">
+    <Key>
+      <PropertyRef Name="CallDetailId" />
+    </Key>
+    <Property Name="CallDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MobileLine" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CalledPartyNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CalledPartyDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Duration" Type="Int32" Nullable="false" />
+    <Property Name="TotalCost" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhoneLine">
+    <Key>
+      <PropertyRef Name="MobileLineId" />
+    </Key>
+    <Property Name="MobileLineId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MobileLine" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="idUsuario" />
+    </Key>
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="NombreUsuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="TagUsuario" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Clave" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TipoUsuario" Type="InterselDBModel.TipoUsuario" />
+    <Property Name="Rol" Type="InterselDBModel.URoles" />
+    <Property Name="MobileLine" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Activo" Type="Boolean" />
+  </EntityType>
+  <EntityContainer Name="InterselDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="PhoneDetail" EntityType="Self.PhoneDetail" />
+    <EntitySet Name="PhoneLine" EntityType="Self.PhoneLine" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+    <FunctionImport Name="LOGINSP">
+      <Parameter Name="TagUsuario" Mode="In" Type="String" />
+      <Parameter Name="Clave" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <EnumType Name="TipoUsuario">
+    <Member Name="Interno" Value="1" />
+    <Member Name="Externo" Value="2" />
+  </EnumType>
+  <EnumType Name="URoles">
+    <Member Name="Administrador" Value="1" />
+    <Member Name="Supervisor" Value="2" />
+    <Member Name="Coordinador" Value="3" />
+  </EnumType>
+</Schema>

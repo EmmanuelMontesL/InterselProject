@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="InterselDBModelStoreContainer" CdmEntityContainer="InterselDBEntities">
+    <EntitySetMapping Name="PhoneDetail">
+      <EntityTypeMapping TypeName="InterselDBModel.PhoneDetail">
+        <MappingFragment StoreEntitySet="PhoneDetail">
+          <ScalarProperty Name="CallDetailId" ColumnName="CallDetailId" />
+          <ScalarProperty Name="MobileLine" ColumnName="MobileLine" />
+          <ScalarProperty Name="CalledPartyNumber" ColumnName="CalledPartyNumber" />
+          <ScalarProperty Name="CalledPartyDescription" ColumnName="CalledPartyDescription" />
+          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhoneLine">
+      <EntityTypeMapping TypeName="InterselDBModel.PhoneLine">
+        <MappingFragment StoreEntitySet="PhoneLine">
+          <ScalarProperty Name="MobileLineId" ColumnName="MobileLineId" />
+          <ScalarProperty Name="MobileLine" ColumnName="MobileLine" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="InterselDBModel.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+          <ScalarProperty Name="TagUsuario" ColumnName="TagUsuario" />
+          <ScalarProperty Name="Clave" ColumnName="Clave" />
+          <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="MobileLine" ColumnName="MobileLine" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="LOGINSP" FunctionName="InterselDBModel.Store.LOGINSP" />
+  </EntityContainerMapping>
+</Mapping>

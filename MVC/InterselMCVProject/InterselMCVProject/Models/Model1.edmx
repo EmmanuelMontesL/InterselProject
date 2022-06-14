@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="InterselDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="PhoneDetail">
+          <Key>
+            <PropertyRef Name="CallDetailId" />
+          </Key>
+          <Property Name="CallDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MobileLine" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="CalledPartyNumber" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="CalledPartyDescription" Type="varchar(max)" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+          <Property Name="Duration" Type="int" Nullable="false" />
+          <Property Name="TotalCost" Type="decimal" Precision="10" Scale="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhoneLine">
+          <Key>
+            <PropertyRef Name="MobileLineId" />
+          </Key>
+          <Property Name="MobileLineId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MobileLine" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreUsuario" Type="varchar" MaxLength="200" />
+          <Property Name="TagUsuario" Type="varchar" MaxLength="10" />
+          <Property Name="Clave" Type="varchar" MaxLength="10" />
+          <Property Name="TipoUsuario" Type="int" />
+          <Property Name="Rol" Type="int" />
+          <Property Name="MobileLine" Type="varchar" MaxLength="15" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <Function Name="LOGINSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TagUsuario" Type="varchar" Mode="In" />
+          <Parameter Name="Clave" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="InterselDBModelStoreContainer">
+          <EntitySet Name="PhoneDetail" EntityType="Self.PhoneDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhoneLine" EntityType="Self.PhoneLine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InterselDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="PhoneDetail">
+          <Key>
+            <PropertyRef Name="CallDetailId" />
+          </Key>
+          <Property Name="CallDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MobileLine" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CalledPartyNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CalledPartyDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Duration" Type="Int32" Nullable="false" />
+          <Property Name="TotalCost" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhoneLine">
+          <Key>
+            <PropertyRef Name="MobileLineId" />
+          </Key>
+          <Property Name="MobileLineId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MobileLine" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="TagUsuario" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Clave" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TipoUsuario" Type="InterselDBModel.TipoUsuario" />
+          <Property Name="Rol" Type="InterselDBModel.URoles" />
+          <Property Name="MobileLine" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+        </EntityType>
+        <EntityContainer Name="InterselDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PhoneDetail" EntityType="Self.PhoneDetail" />
+          <EntitySet Name="PhoneLine" EntityType="Self.PhoneLine" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <FunctionImport Name="LOGINSP">
+            <Parameter Name="TagUsuario" Mode="In" Type="String" />
+            <Parameter Name="Clave" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <EnumType Name="TipoUsuario">
+          <Member Name="Interno" Value="1" />
+          <Member Name="Externo" Value="2" />
+        </EnumType>
+        <EnumType Name="URoles">
+          <Member Name="Administrador" Value="1" />
+          <Member Name="Supervisor" Value="2" />
+          <Member Name="Coordinador" Value="3" />
+        </EnumType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InterselDBModelStoreContainer" CdmEntityContainer="InterselDBEntities">
+          <EntitySetMapping Name="PhoneDetail">
+            <EntityTypeMapping TypeName="InterselDBModel.PhoneDetail">
+              <MappingFragment StoreEntitySet="PhoneDetail">
+                <ScalarProperty Name="CallDetailId" ColumnName="CallDetailId" />
+                <ScalarProperty Name="MobileLine" ColumnName="MobileLine" />
+                <ScalarProperty Name="CalledPartyNumber" ColumnName="CalledPartyNumber" />
+                <ScalarProperty Name="CalledPartyDescription" ColumnName="CalledPartyDescription" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhoneLine">
+            <EntityTypeMapping TypeName="InterselDBModel.PhoneLine">
+              <MappingFragment StoreEntitySet="PhoneLine">
+                <ScalarProperty Name="MobileLineId" ColumnName="MobileLineId" />
+                <ScalarProperty Name="MobileLine" ColumnName="MobileLine" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="InterselDBModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="TagUsuario" ColumnName="TagUsuario" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="MobileLine" ColumnName="MobileLine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="LOGINSP" FunctionName="InterselDBModel.Store.LOGINSP" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
